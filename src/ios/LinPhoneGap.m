@@ -8,13 +8,16 @@
 #import "LinPhoneGap.h"
 #import <Cordova/CDV.h>
 
-#if 0 // needs liblinphone libraries
+/* in order to use this plugin you will need to add linphone libraries to your Xcode project. This is 
+non-trivial and requires advance experience with Xcode and knowledge of how to download, build and integrate third-party libraries.
+Change the 0 below to 1 when liblinphone has been added to your project
+*/
+#if 0
 
 #import "LinphoneManager.h"
 #import "lpconfig.h"
 
 struct _ConfigCtx {
-//    LinphoneCore *lc;
     LpConfig *lpConfig;
     const char *section;
 };
@@ -43,13 +46,12 @@ void iterate_codecs(const char *type, const MSList *codecs)
 	}
 }
 
-@implementation BRSIP
+@implementation LinPhoneGap
 
 - (void)pluginInitialize
 {
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOrientationDidChange:) name:
 UIApplicationDidChangeStatusBarOrientationNotification object:nil];
-    NSLog(@"JR1");
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(callUpdateEvent:)
                                                  name:kLinphoneCallUpdate
@@ -84,7 +86,6 @@ UIApplicationDidChangeStatusBarOrientationNotification object:nil];
     }
     
     [super pluginInitialize];
-    NSLog(@"JR2");
 }
 
 - (void)log:(CDVInvokedUrlCommand*)command
@@ -138,7 +139,7 @@ UIApplicationDidChangeStatusBarOrientationNotification object:nil];
     }
 
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"hotdog"];
-    NSMutableString *jsStatement = [NSMutableString stringWithString:@"window.plugins.BRSIP._phoneEvent({_:0"];
+    NSMutableString *jsStatement = [NSMutableString stringWithString:@"window.plugins.LinPhoneGap._phoneEvent({_:0"];
     switch (state) {
         case LinphoneCallIdle:                  /**<Initial call state */
         case LinphoneCallIncomingReceived:      /**<This is a new incoming call */
@@ -222,19 +223,15 @@ UIApplicationDidChangeStatusBarOrientationNotification object:nil];
     int nr = -1;
     switch (co) {
         case UIInterfaceOrientationPortrait:
-            NSLog(@"PU");
             nr = 0;
             break;
         case UIInterfaceOrientationPortraitUpsideDown:
-            NSLog(@"PD");
             nr = 180;
             break;
         case UIInterfaceOrientationLandscapeRight:
-            NSLog(@"LR");
             nr = 270;
             break;
         case UIInterfaceOrientationLandscapeLeft:
-            NSLog(@"LL");
             nr = 90;
             break;
     }
@@ -260,4 +257,5 @@ UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 
 @end
 
-#endif
+#endif /* have included linphone libraries in project */
+

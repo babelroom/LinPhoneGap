@@ -25,8 +25,8 @@
  
     /**
      */
-    LinPhoneGap.prototype.call = function(num,addr,cb) {
-        cordovaRef.exec(function(){cb();}, function(){cb('err');}, "LinPhoneGap", "call", ["sip:"+num+"@"+addr]);
+    LinPhoneGap.prototype.call = function(num,cb) {
+        cordovaRef.exec(function(){cb();}, function(){cb('err');}, "LinPhoneGap", "call", [num]);
     }
  
     /**
