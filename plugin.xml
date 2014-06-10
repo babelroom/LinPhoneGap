@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.babelroom.linphonegap"
+    version="0.9.0">
+    <name>LinPhoneGap</name>
+    <description>A plugin to integrate linphone softphone features</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,phonegap,linphone</keywords>
+    <js-module src="www/linphonegap.js" name="linphonegap">
+        <merges target="linphonegap" />
+    </js-module>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="LinPhoneGap">
+                <param name="ios-package" value="LinPhoneGap"/>
+            </feature>
+        </config-file>
+        <header-file src="src/ios/LinPhoneGap.h"/>
+        <source-file src="src/ios/LinPhoneGap.m"/>
+    </platform>
+</plugin>
