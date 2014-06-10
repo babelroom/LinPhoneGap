@@ -90,14 +90,14 @@ UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 
 - (void)log:(CDVInvokedUrlCommand*)command
 {
-    id message = [command.arguments objectAtIndex:0];    // TODO check parameters!!
+    id message = [command.arguments objectAtIndex:0];
     NSLog(@"%@",message);
 }
 
 - (void)call:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult = nil;
-    NSString* sipaddr = [command.arguments objectAtIndex:0];    // TODO check parameters!!
+    NSString* sipaddr = [command.arguments objectAtIndex:0];
     if([LinphoneManager isLcReady]) {
         LinphoneCore* lc = [LinphoneManager getLc];
         if (!linphone_core_get_current_call(lc)) {  /* only 1 call at a time */
@@ -214,12 +214,8 @@ UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 
 - (void) checkOrientation
 {
-    /* now unused
-    // for some reason oo is the *old* orientation
-    UIInterfaceOrientation oo = [[[notif userInfo] objectForKey: UIApplicationStatusBarOrientationUserInfoKey] integerValue];
-    */
     UIInterfaceOrientation co = [[UIApplication sharedApplication] statusBarOrientation];
-    NSLog(@"orientation change - %d %d",0/*oo*/,co);
+    NSLog(@"orientation change - %d %d", 0, co);
     int nr = -1;
     switch (co) {
         case UIInterfaceOrientationPortrait:
