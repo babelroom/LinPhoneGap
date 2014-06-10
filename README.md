@@ -21,10 +21,7 @@ Simple Usage
 Usage
 =====
 
-```javascript
-
-...
-
+```html
 <div>
     <input type="text" id="number" value="Guest" />
     <button id="call" onClick="javascript:doCall();" disabled>Call</button>
@@ -32,7 +29,8 @@ Usage
     <button id="videoOn" onClick="javascript:doVideoOn();" disabled>Video On</button>
     <button id="videoOff" onClick="javascript:doVideoOff();" disabled>Video Off</button>
 </div>
-
+```
+```javascript
 <script>
     var inCall = false;
     function onCallUpdate(dict) {
@@ -52,10 +50,6 @@ Usage
     function doVideoOn() { window.plugins.LinPhoneGap.videoOn(function(err){}); }
     function doVideoOff() { window.plugins.LinPhoneGap.videoOff(function(err){}); }
 </script>
-
-...
-
-
 ```
 
 Installation
