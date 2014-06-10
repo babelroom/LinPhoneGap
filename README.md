@@ -6,19 +6,12 @@ Phonegap (Cordova) plugin to wrap the linphone library softphone library for pho
 
 Important
 =========
-In order to use this plugin you will need to download and build the linphone iOS libraries and then add them to your phonegap project. This is a challenging task. Start at linphone.org
+In order to use this plugin you will need to download and build the linphone iOS libraries and then add them to your phonegap project.
+
+This is a challenging task. Start at linphone.org
 
 This is a preliminary implementation refactored from a larger project. Useful as a reference or starting point for your own plugin. YMMV.
 
-
-Simple Usage
-=====
-
-```javascript
-
-    window.plugins.LinPhoneGap.call("+16505551212",function(err){});
-
-```
 
 Usage
 =====
