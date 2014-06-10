@@ -2,14 +2,13 @@
 //  LinPhoneGap.m
 //
 //  Created by John Roy on 04/01/2014
+//  Some code copied from linphone under GPL. See LICENSE.gpl. linphone.org
 //  Copyright (c) 2014 BabelRoom. All rights reserved.
 
 #import "LinPhoneGap.h"
 #import <Cordova/CDV.h>
 
-
-
-#if 0
+#if 0 // needs liblinphone libraries
 
 #import "LinphoneManager.h"
 #import "lpconfig.h"
@@ -32,7 +31,6 @@ void iterate_config_sections(const char *section, void *ctx)
 }
 void iterate_codecs(const char *type, const MSList *codecs)
 {
-//- (void)transformCodecsToKeys: (const MSList *)codecs {
 	LinphoneCore *lc=[LinphoneManager getLc];
 	const MSList *elem=codecs;
 	for(;elem!=NULL;elem=elem->next){
@@ -47,35 +45,10 @@ void iterate_codecs(const char *type, const MSList *codecs)
 
 @implementation BRSIP
 
-//@synthesize callbackId;
-
-
-/*
-// Set observer
-[[NSNotificationCenter defaultCenter] addObserver:self
-                                         selector:@selector(callUpdateEvent:)
-                                             name:kLinphoneCallUpdate
-                                           object:nil];
-*/
 - (void)pluginInitialize
 {
-    // You can listen to more app notifications, see:
-    // http://developer.apple.com/library/ios/#DOCUMENTATION/UIKit/Reference/UIApplication_Class/Reference/Reference.html#//apple_ref/doc/uid/TP40006728-CH3-DontLinkElementID_4
-    
-    // NOTE: if you want to use these, make sure you uncomment the corresponding notification handler
-    
-    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onPause) name:UIApplicationDidEnterBackgroundNotification object:nil];
-    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onResume) name:UIApplicationWillEnterForegroundNotification object:nil];
-    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOrientationWillChange) name:UIApplicationWillChangeStatusBarOrientationNotification object:nil];
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOrientationDidChange:) name:
 UIApplicationDidChangeStatusBarOrientationNotification object:nil];
-//        UIDeviceOrientationDidChangeNotification object:nil];
-    
-    // Added in 2.3.0
-    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveLocalNotification:) name:CDVLocalNotification object:nil];
-    
-    // Added in 2.5.0
-    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pageDidLoad:) name:CDVPageDidLoadNotification object:self.webView];
     NSLog(@"JR1");
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(callUpdateEvent:)
@@ -96,13 +69,9 @@ UIApplicationDidChangeStatusBarOrientationNotification object:nil];
         iterate_codecs("Video", linphone_core_get_video_codecs(lc));
         
         CGRect rect = [[UIScreen mainScreen] bounds];
-//        CGRect viewPreviewRect = CGRectMake(10, 10, 500, 500);
         CGRect rectPreview = CGRectMake(rect.size.width-180, rect.size.height-240, 150, 200);
-//        UIView* myView = [[UIView alloc] initWithFrame:viewRect];
         UIView* myView = [[UIView alloc] initWithFrame:rect];
-        //myView.backgroundColor = [UIColor brownColor]; ... for illustration
         myView.backgroundColor = [UIColor whiteColor];
-//        - (void)insertSubview:(UIView *)view belowSubview:(UIView *)siblingSubview
         UIView* myPreview = [[UIView alloc] initWithFrame:rectPreview];
         
         [self.webView.superview insertSubview:myView belowSubview:self.webView];
@@ -117,19 +86,6 @@ UIApplicationDidChangeStatusBarOrientationNotification object:nil];
     [super pluginInitialize];
     NSLog(@"JR2");
 }
-
-/*- (void)dispose
-{
-    NSLog(@"JR97");
-}
-- (void)onAppTerminate
-{
-    NSLog(@"JR98");
-}
-- (void)dealloc
-{
-    NSLog(@"JR99");
-}*/
 
 - (void)log:(CDVInvokedUrlCommand*)command
 {
@@ -160,19 +116,6 @@ UIApplicationDidChangeStatusBarOrientationNotification object:nil];
     if([LinphoneManager isLcReady]) {
         LinphoneCore* lc = [LinphoneManager getLc];
         LinphoneCall* currentcall = linphone_core_get_current_call(lc);
-/*  -- removed this -- but leave for reference
-    if (linphone_core_is_in_conference(lc) || // In conference
-        (linphone_core_get_conference_size(lc) > 0 && [UIHangUpButton callCount:lc] == 0) // Only one conf
-        ) {
-        linphone_core_terminate_conference(lc);
-    } else if(currentcall != NULL) { // In a call
-        linphone_core_terminate_call(lc, currentcall);
-    } else {
-        const MSList* calls = linphone_core_get_calls(lc);
-        if (ms_list_size(calls) == 1) { // Only one call
-            linphone_core_terminate_call(lc,(LinphoneCall*)(calls->data));
-        }
-    }*/
         if(currentcall != NULL) { // In a call
             linphone_core_terminate_call(lc, currentcall);
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
@@ -189,23 +132,12 @@ UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 - (void)callUpdateEvent: (NSNotification*) notif {
     LinphoneCall *call = [[notif.userInfo objectForKey: @"call"] pointerValue];
     LinphoneCallState state = [[notif.userInfo objectForKey: @"state"] intValue];
-/*- (void)callUpdate:(LinphoneCall *)call state:(LinphoneCallState)state animated:(BOOL)animated {*/
-    NSLog(@"JR5");
     // Fake call update
     if(call == NULL) {
         return;
     }
 
-//    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:state];
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"hotdog"];
-//    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
-//    [super writeJavascript:[pluginResult toSuccessCallbackString:self.callbackId]];
-//    [super writeJavascript:[pluginResult toSuccessCallbackString:self.callbackId]];
-//    [super writeJavascript:[pluginResult toErrorCallbackString:self.callbackId]];
-    
-//    NSString *jsStatement = [NSString stringWithFormat:@"window.plugins.BRSIP._phoneEvent('%s');", stateAsString];
-    
-    //    NSMutableString *jsStatement = [[NSMutableString alloc] initWithString:@"window.plugins.BRSIP._phoneEvent({"];
     NSMutableString *jsStatement = [NSMutableString stringWithString:@"window.plugins.BRSIP._phoneEvent({_:0"];
     switch (state) {
         case LinphoneCallIdle:                  /**<Initial call state */
@@ -250,15 +182,7 @@ UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 /*    [jsStatement appendFormat:@",_state:'%s'", linphone_call_state_to_string(state)]; -- good for debugging, reference */
     [jsStatement appendString:@"})"];
     [super writeJavascript:jsStatement];
-//    NSLog(@"JR7");
 }
-
-/*- (void)callUpdateEvent: (NSNotification*) notif {
-    LinphoneCall *call = [[notif.userInfo objectForKey: @"call"] pointerValue];
-    LinphoneCallState state = [[notif.userInfo objectForKey: @"state"] intValue];
-    [self callUpdate:call state:state animated:TRUE];
-    NSLog(@"JR6");
-}*/
 
 - (void)videoOnOff:(CDVInvokedUrlCommand*)command
 {
@@ -333,63 +257,6 @@ UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 {
     [self checkOrientation];
 }
-
-/*
-video stuff:
-
-- (void)onOn {
-    if(![LinphoneManager isLcReady]) {
-        [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle video button: Linphone core not ready"];
-        return;
-    }
-    
-	LinphoneCore* lc = [LinphoneManager getLc];
-    
-    if (!linphone_core_video_enabled(lc))
-        return;
-    
-    [self setEnabled: FALSE];
-    [waitView startAnimating];
-    
-    LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
-	if (call) {
-		LinphoneCallAppData* callAppData = (LinphoneCallAppData*)linphone_call_get_user_pointer(call);
-		callAppData->videoRequested=TRUE; /* will be used later to notify user if video was not activated because of the linphone core*./
-        LinphoneCallParams* call_params =  linphone_call_params_copy(linphone_call_get_current_params(call));
-        linphone_call_params_enable_video(call_params, TRUE);
-        linphone_core_update_call(lc, call, call_params);
-		linphone_call_params_destroy(call_params);
-    } else {
-		[LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle video button, because no current call"];
-	}   
-}
-
-- (void)onOff {
-    if(![LinphoneManager isLcReady]) {
-        [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle video button: Linphone core not ready"];
-        return;
-    }
-    
-	LinphoneCore* lc = [LinphoneManager getLc];
-    
-    if (!linphone_core_video_enabled(lc))
-        return;
-    
-    [self setEnabled: FALSE];
-    [waitView startAnimating];
-    
-    LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
-	if (call) { 
-        LinphoneCallParams* call_params =  linphone_call_params_copy(linphone_call_get_current_params(call));
-        linphone_call_params_enable_video(call_params, FALSE);
-        linphone_core_update_call(lc, call, call_params);
-		linphone_call_params_destroy(call_params);
-    } else {
-		[LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle video button, because no current call"];
-	}
-}
-
-*/
 
 @end
 
