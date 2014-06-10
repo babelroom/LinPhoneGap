@@ -7,18 +7,12 @@
 
 #import <Cordova/CDV.h>
 
-@interface LinPhoneGap : CDVPlugin /*{
-	NSString* callbackId;
-}*/
+@interface LinPhoneGap : CDVPlugin
 
-//@property (retain) NSString* callbackId;
-
-//- (void)pluginInitialize;
-
-//- (void)log:(CDVInvokedUrlCommand*)command;
-//- (void)call:(CDVInvokedUrlCommand*)command;
-//- (void)hangup:(CDVInvokedUrlCommand*)command;
-
-//@property (nonatomic, retain) IBOutlet UIView* videoView;
+- (void)log:(CDVInvokedUrlCommand*)command;
+- (void)call:(CDVInvokedUrlCommand*)command;
+- (void)hangup:(CDVInvokedUrlCommand*)command;
+- (void)videoOnOff:(CDVInvokedUrlCommand*)command;
 
 @end
+

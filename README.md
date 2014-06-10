@@ -8,6 +8,8 @@ Important
 =========
 In order to use this plugin you will need to download and build the linphone iOS libraries and then add them to your phonegap project. This is a challenging task. Start at linphone.org
 
+This is a preliminary implementation refactored from a larger project. Useful as a reference or starting point for your own plugin. YMMV.
+
 
 Simple Usage
 =====
@@ -43,6 +45,11 @@ Usage
         inCall = (dict.canCall!==true);
         }
 
+    function setup() {
+        window.plugins.LinPhoneGap.call(number,function(err){});
+        window.plugins.LinPhoneGap.initPhone(onCallUpdate);
+        }
+
     function doCall() {
         var number = document.getElementById('number').value;
         window.plugins.LinPhoneGap.call(number,function(err){});
@@ -51,9 +58,16 @@ Usage
     function doHangup() { window.plugins.LinPhoneGap.hangup(function(err){}); }
     function doVideoOn() { window.plugins.LinPhoneGap.videoOn(function(err){}); }
     function doVideoOff() { window.plugins.LinPhoneGap.videoOff(function(err){}); }
+
+    /* *IMPORTANT*
+    You will need to invoke window.plugins.LinPhoneGap.initPhone(onCallUpdate) before using this
+    functions. Exactly how to do that will depend on your environment, frameworks and target
+    browsers. 
+    */
+    
 ```
 
 Installation
 ============
-cordova local plugin add LinPhoneGap
+cordova plugin add https://github.com/babelroom/LinPhoneGap.git
 
