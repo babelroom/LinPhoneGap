@@ -29,9 +29,11 @@ Usage
     <button id="videoOn" onClick="javascript:doVideoOn();" disabled>Video On</button>
     <button id="videoOff" onClick="javascript:doVideoOff();" disabled>Video Off</button>
 </div>
+<script>
+    // see below
+</script>
 ```
 ```javascript
-<script>
     var inCall = false;
     function onCallUpdate(dict) {
         document.getElementById('call').disabled = (dict.canCall!==true);
@@ -49,7 +51,6 @@ Usage
     function doHangup() { window.plugins.LinPhoneGap.hangup(function(err){}); }
     function doVideoOn() { window.plugins.LinPhoneGap.videoOn(function(err){}); }
     function doVideoOff() { window.plugins.LinPhoneGap.videoOff(function(err){}); }
-</script>
 ```
 
 Installation
