@@ -2,17 +2,17 @@
 //  LinPhoneGap.m
 //
 //  Created by John Roy on 04/01/2014
-//  Some code copied from linphone under GPL. See LICENSE.gpl. linphone.org
+//  Some code copied from linphone under GPL. See LICENSE.gpl and linphone.org
 //  Copyright (c) 2014 BabelRoom. All rights reserved.
 
 #import "LinPhoneGap.h"
 #import <Cordova/CDV.h>
 
 /* in order to use this plugin you will need to add linphone libraries to your Xcode project. This is 
-non-trivial and requires advance experience with Xcode and knowledge of how to download, build and integrate third-party libraries.
-Change the 0 below to 1 when liblinphone has been added to your project
+non-trivial and requires experience with Xcode and knowledge of how to download, build and integrate third-party libraries.
+Change the 1 below to 0 if you wish to integrate this plugin without including liblinphone.
 */
-#if 0
+#if 1
 
 #import "LinphoneManager.h"
 #import "lpconfig.h"
