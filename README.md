@@ -53,8 +53,8 @@ Usage
     function doVideoOff() { window.plugins.LinPhoneGap.videoOff(function(err){}); }
 
     /* *IMPORTANT*
-    You will need to invoke window.plugins.LinPhoneGap.initPhone(onCallUpdate) before using this
-    functions. Exactly how to do that will depend on your environment, frameworks and target
+    You will need to invoke window.plugins.LinPhoneGap.initPhone(onCallUpdate) before using these
+    functions. Exactly how you do that will depend on your environment, frameworks and target
     browsers. 
     */
     
