@@ -1,3 +1,13 @@
+**NOTE**
+========
+Code is currently being refactored. Do not use. Preliminary.
+
+
+
+
+
+
+
 Description
 ===========
 Wraps linphone library functions to allow adding videophone features to a phonegap (cordova) app
