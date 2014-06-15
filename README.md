@@ -10,7 +10,9 @@ In order to use this plugin you will need to download and build the linphone iOS
 
 This is a challenging task. Start at linphone.org
 
-This is a preliminary implementation refactored from a larger project. Useful as a reference or starting point for your own plugin. YMMV.
+This is a preliminary implementation refactored from a working project. At this point we've not taken this refactored code forward to build a working app. Useful as a reference or starting point for your own plugin. YMMV.
+
+If there's interest we'll commit more time to enhancing and maintaining this.
 
 
 Usage
