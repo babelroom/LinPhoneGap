@@ -1,7 +1,7 @@
 
 Description
 ===========
-Phonegap (Cordova) plugin to wrap the linphone library softphone library for phonegap videophone applications.
+Phonegap (Cordova) plugin to wrap the linphone softphone library for phonegap videophone applications.
 
 
 Important
