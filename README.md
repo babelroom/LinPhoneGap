@@ -41,7 +41,6 @@ Usage
         }
 
     function setup() {
-        window.plugins.LinPhoneGap.call(number,function(err){});
         window.plugins.LinPhoneGap.initPhone(onCallUpdate);
         }
 
